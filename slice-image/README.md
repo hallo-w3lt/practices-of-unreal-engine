@@ -18,5 +18,7 @@ To change the size of the grid or the space between the pieces, you need to chan
 
 ## Enjoy =)
 
+[Gravituz](https://itandfeel.itch.io/gravituz) cover image
+
 ## License
 [MIT](https://github.com/hallo-w3lt/practices-of-unreal-engine/blob/main/LICENSE)
