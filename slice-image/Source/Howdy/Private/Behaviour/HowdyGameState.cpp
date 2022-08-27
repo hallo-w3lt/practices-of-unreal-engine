@@ -1,0 +1,51 @@
+/*
+ *  Developed by IT&feel CA
+ *  Author: @itandfeel
+ *  Designer: Thamesis Marrero @thamesis09
+ *  Programmer: Victor Dominguez @hallo_w3lt
+ */
+
+#include "HowdyGameState.h"
+
+#include "HowdyGameMode.h"
+#include "HowdyPlayerController.h"
+#include "HowdyTypes.h"
+
+AHowdyGameState::AHowdyGameState(const FObjectInitializer& ObjectInitializer) : AGameStateBase(ObjectInitializer)
+{
+	// ...
+}
+
+void AHowdyGameState::BeginPlay()
+{
+	Super::BeginPlay();
+
+	PlayerController = Cast<AHowdyPlayerController>(GetWorld()->GetFirstPlayerController());
+}
+
+void AHowdyGameState::OnGameStart()
+{
+	SetGameplayState(EGameplayState::Playing);
+}
+
+void AHowdyGameState::StartGameplayStateMachine()
+{
+	HowdyGameMode = Cast<AHowdyGameMode>(GetDefaultGameMode());
+
+	OnGameStart();
+}
+
+void AHowdyGameState::SetGameplayState(const EGameplayState::Type InState)
+{
+	GameplayState = InState;
+}
+
+void AHowdyGameState::FinishGame()
+{
+	if (nullptr == PlayerController) { return; }
+
+	GetWorldTimerManager().ClearAllTimersForObject(this);
+	SetGameplayState(EGameplayState::Finished);
+	PlayerController->SetInputMode(FInputModeGameOnly());
+	GameplayState = EGameplayState::Finished;
+}
