@@ -25,7 +25,7 @@ void AHowdyGameState::BeginPlay()
 
 void AHowdyGameState::OnGameStart()
 {
-	SetGameplayState(EGameplayState::Playing);
+	SetGameplayState(EGameplayStateType::Playing);
 }
 
 void AHowdyGameState::StartGameplayStateMachine()
@@ -35,7 +35,7 @@ void AHowdyGameState::StartGameplayStateMachine()
 	OnGameStart();
 }
 
-void AHowdyGameState::SetGameplayState(const EGameplayState::Type InState)
+void AHowdyGameState::SetGameplayState(EGameplayStateType const InState)
 {
 	GameplayState = InState;
 }
@@ -45,7 +45,7 @@ void AHowdyGameState::FinishGame()
 	if (nullptr == PlayerController) { return; }
 
 	GetWorldTimerManager().ClearAllTimersForObject(this);
-	SetGameplayState(EGameplayState::Finished);
+	SetGameplayState(EGameplayStateType::Finished);
 	PlayerController->SetInputMode(FInputModeGameOnly());
-	GameplayState = EGameplayState::Finished;
+	GameplayState = EGameplayStateType::Finished;
 }

@@ -7,12 +7,10 @@
 
 #pragma once
 
-namespace EGameplayState
+enum class EGameplayStateType
 {
-	enum Type
-	{
-		Waiting,
-		Playing,
-		Finished,
-	};
-}
+	Waiting,
+	Playing,
+	Finished,
+};
+

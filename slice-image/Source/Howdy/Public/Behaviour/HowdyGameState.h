@@ -37,7 +37,7 @@ public:
 
 	void StartGameplayStateMachine();
 
-	void SetGameplayState(EGameplayState::Type InState);
+	void SetGameplayState(EGameplayStateType InState);
 
 private:
 	UPROPERTY()
@@ -45,10 +45,10 @@ private:
 	UPROPERTY()
 		const class AHowdyGameMode* HowdyGameMode{ nullptr };
 
-	EGameplayState::Type GameplayState;
+	EGameplayStateType GameplayState;
 
 public:
-	FORCEINLINE bool IsGameFinished() const { return EGameplayState::Finished == GameplayState; }
-	FORCEINLINE bool IsGamePaying() const { return EGameplayState::Playing == GameplayState; }
-	FORCEINLINE int32 GetGameStat() const { return GameplayState; }
+	FORCEINLINE bool IsGameFinished() const { return EGameplayStateType::Finished == GameplayState; }
+	FORCEINLINE bool IsGamePaying() const { return EGameplayStateType::Playing == GameplayState; }
+	FORCEINLINE EGameplayStateType GetGameStat() const { return GameplayState; }
 };

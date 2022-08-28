@@ -78,8 +78,8 @@ void APuzzleGrid::BeginPlay()
 		for (int32 BlockIndex{ 0 }; BlockIndex < Helper::GetSize(Size); ++BlockIndex)
 		{
 			int32 const Mod{ BlockIndex % Size };
-			float const XOffset{ (BlockIndex / Size) * BlockSpacing };
-			float const YOffset{ Mod * BlockSpacing };
+			float const XOffset{ static_cast<float>((BlockIndex / Size) * BlockSpacing) };
+			float const YOffset{ static_cast<float>(Mod * BlockSpacing) };
 
 			if (BlockIndex > 0 && 0 == Mod)
 			{
