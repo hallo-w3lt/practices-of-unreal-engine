@@ -22,15 +22,16 @@ class HOWDY_API UBrandWidget : public UUserWidget
 
 public:
 	explicit UBrandWidget(const FObjectInitializer& MovieSceneBlends);
-	virtual ~UBrandWidget() {};
+
+	virtual ~UBrandWidget() override;
 
 protected:
 	virtual void NativeConstruct() override;
 
 private:
 	UPROPERTY()
-		class AHowdyGameMode* HowdyGameMode{ nullptr };
+	class AHowdyGameMode* HowdyGameMode{nullptr};
 
 	UPROPERTY(BlueprintReadWrite, meta = (AllowPrivateAccess = true, BindWidget))
-		class UTextBlock* BrandText{ nullptr };
+	class UTextBlock* BrandText{nullptr};
 };

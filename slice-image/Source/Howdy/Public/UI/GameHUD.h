@@ -8,7 +8,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "HowdyPlayerController.h"
 #include "GameFramework/HUD.h"
 
 #include "GameHUD.generated.h"
@@ -23,28 +22,29 @@ class HOWDY_API AGameHUD : public AHUD
 
 public:
 	explicit AGameHUD(const FObjectInitializer& ObjectInitializer);
-	virtual ~AGameHUD() {};
+
+	virtual ~AGameHUD() override;
 
 protected:
 	virtual void BeginPlay() override;
 
-	void ShowWidget(UUserWidget& InWidget) const;
-	void HideWidget(UUserWidget& InWidget) const;
+	static void ShowWidget(UUserWidget& InWidget);
+	static void HideWidget(UUserWidget& InWidget);
 
 private:
 	UPROPERTY()
-		class AHowdyGameState* HowdyGameState{ nullptr };
+	class AHowdyGameState* HowdyGameState{nullptr};
 
 	UPROPERTY()
-		class AHowdyGameMode* HowdyGameMode{ nullptr };
+	class AHowdyGameMode* HowdyGameMode{nullptr};
 
 	UPROPERTY(Category = Widgets, EditDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-		TSubclassOf<class UGridWidget> GridWidgetClass;
+	TSubclassOf<class UGridWidget> GridWidgetClass;
 
 	UPROPERTY()
-		class UGridWidget* GridWidget{ nullptr };
+	UGridWidget* GridWidget{nullptr};
 
 public:
-	FORCEINLINE TSubclassOf<class UGridWidget> GetGridWidgetClass() const { return GridWidgetClass; }
-	FORCEINLINE class UGridWidget* GetGridWidget() const { return GridWidget; }
+	FORCEINLINE TSubclassOf<UGridWidget> GetGridWidgetClass() const { return GridWidgetClass; }
+	FORCEINLINE UGridWidget* GetGridWidget() const { return GridWidget; }
 };

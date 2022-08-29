@@ -13,4 +13,3 @@ enum class EGameplayStateType
 	Playing,
 	Finished,
 };
-

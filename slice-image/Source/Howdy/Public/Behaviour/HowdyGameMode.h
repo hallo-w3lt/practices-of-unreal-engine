@@ -23,7 +23,8 @@ class HOWDY_API AHowdyGameMode : public AGameModeBase
 
 public:
 	explicit AHowdyGameMode(const FObjectInitializer& ObjectInitializer);
-	virtual ~AHowdyGameMode() {};
+
+	virtual ~AHowdyGameMode() override;
 
 	virtual void InitGameState() override;
 
@@ -35,16 +36,16 @@ public:
 
 private:
 	UPROPERTY(Category = Class, EditDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-		TSubclassOf<APuzzleBlock> PuzzleBlockClass;
+	TSubclassOf<APuzzleBlock> PuzzleBlockClass;
 
 	UPROPERTY()
-		class AHowdyPlayerController* PlayerController{ nullptr };
+	AHowdyPlayerController* PlayerController{nullptr};
 
 	UPROPERTY(Category = Grid, EditAnywhere, BlueprintReadOnly, meta = (UIMin = 3, UIMax = 4, AllowPrivateAccess = "true"))
-		int32 Size = 4;
+	int32 Size{4};
 
 	UPROPERTY(Category = Grid, EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-		float BlockSpacing = 110.f;
+	float BlockSpacing{110.f};
 
 public:
 	FORCEINLINE TSubclassOf<APuzzleBlock> GetPuzzleBlockClass() const { return PuzzleBlockClass; }

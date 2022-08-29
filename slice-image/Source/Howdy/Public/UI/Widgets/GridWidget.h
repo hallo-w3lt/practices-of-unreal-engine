@@ -22,14 +22,14 @@ class HOWDY_API UGridWidget : public UUserWidget
 
 public:
 	explicit UGridWidget(const FObjectInitializer& MovieSceneBlends);
-	virtual ~UGridWidget() {};
+	virtual ~UGridWidget() override;
 
 protected:
 	virtual void NativeConstruct() override;
 
 private:
 	UPROPERTY(Category = Widgets, BlueprintReadWrite, meta = (AllowPrivateAccess = true, BindWidget))
-		class UBrandWidget* BrandWidget{ nullptr };
+	class UBrandWidget* BrandWidget{nullptr};
 
 public:
 	FORCEINLINE class UBrandWidget* GetScoreWidget() const { return BrandWidget; }

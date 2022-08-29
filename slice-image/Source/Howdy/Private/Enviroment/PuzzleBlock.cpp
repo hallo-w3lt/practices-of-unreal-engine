@@ -7,7 +7,6 @@
 
 #include "PuzzleBlock.h"
 
-#include "DrawDebugHelpers.h"
 #include "GameHUD.h"
 #include "GridWidget.h"
 #include "UObject/ConstructorHelpers.h"
@@ -31,7 +30,7 @@ APuzzleBlock::APuzzleBlock(const FObjectInitializer& ObjectInitializer) : AActor
 		ConstructorHelpers::FObjectFinderOptional<UMaterialInstance> PuzzleMaterial;
 
 		FConstructorStatics() : DefaultMesh(TEXT("StaticMesh'/Game/Meshes/SM_PuzzleCube.SM_PuzzleCube'")),
-			PuzzleMaterial(TEXT("/Game/Base/Materials/MI_Puzzle.MI_Puzzle"))
+		                        PuzzleMaterial(TEXT("/Game/Base/Materials/MI_Puzzle.MI_Puzzle"))
 		{
 			// ...
 		}
@@ -58,6 +57,11 @@ APuzzleBlock::APuzzleBlock(const FObjectInitializer& ObjectInitializer) : AActor
 
 	PlaneMesh->OnClicked.AddDynamic(this, &APuzzleBlock::OnClickedBlock);
 	PlaneMesh->OnInputTouchBegin.AddDynamic(this, &APuzzleBlock::OnFingerPressedBlock);
+}
+
+APuzzleBlock::~APuzzleBlock()
+{
+	// ...
 }
 
 // void APuzzleBlock::NotifyActorBeginOverlap(AActor* OtherActor)
@@ -118,9 +122,9 @@ void APuzzleBlock::BeginPlay()
 	//#endif
 }
 
-void APuzzleBlock::Tick(const float DeltaTime)
+void APuzzleBlock::Tick(const float InDeltaTime)
 {
-	Super::Tick(DeltaTime);
+	Super::Tick(InDeltaTime);
 
 	if (!bCanDragging || !bDragging || nullptr == PlayerController || nullptr == HUD) { return; }
 
@@ -131,12 +135,11 @@ void APuzzleBlock::Tick(const float DeltaTime)
 		FVector WorldLocation{}, WorldDirection{};
 		PlayerController->DeprojectMousePositionToWorld(WorldLocation, WorldDirection);
 
-		const FVector Location{ WorldDirection * ScopeCamera + WorldLocation };
+		const FVector Location{WorldDirection * ScopeCamera + WorldLocation};
 		SetActorRelativeLocation(Location);
 	}
 	else
-	{
-		const FVector Start{ CameraActor->GetActorForwardVector() + CameraActor->GetActorLocation() };
+	{		
 		const FCollisionQueryParams CollisionParams;
 
 		bHitting = OutHit.bBlockingHit;
@@ -149,8 +152,7 @@ void APuzzleBlock::Tick(const float DeltaTime)
 
 		if (!bOverlapped && PuzzleBlockOverlapped != nullptr && PuzzleBlockOverlapped->GetIndex() == Index)
 		{
-			auto* Material{ PuzzleBlockOverlapped->GetMaterialInstanceDynamic() };
-			if (Material != nullptr)
+			if (auto* Material{PuzzleBlockOverlapped->GetMaterialInstanceDynamic()}; Material != nullptr)
 			{
 				Material->SetScalarParameterValue("Saturation", 1);
 			}
@@ -180,7 +182,10 @@ void APuzzleBlock::SetMaterialParameter(const FMaterialParametersStruct& InValue
 
 void APuzzleBlock::OnClickedBlock(UPrimitiveComponent* ClickedComponent, FKey ButtonClicked) { HandleClicked(); }
 
-void APuzzleBlock::OnFingerPressedBlock(ETouchIndex::Type FingerIndex, UPrimitiveComponent* TouchedComponent) { HandleClicked(); }
+void APuzzleBlock::OnFingerPressedBlock(ETouchIndex::Type FingerIndex, UPrimitiveComponent* TouchedComponent)
+{
+	HandleClicked();
+}
 
 void APuzzleBlock::HandleClicked()
 {

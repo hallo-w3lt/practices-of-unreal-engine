@@ -8,12 +8,16 @@
 #include "BrandWidget.h"
 
 #include "HowdyGameMode.h"
-#include "HowdyGameState.h"
 #include "TextBlock.h"
 #include "UMGSequencePlayer.h"
 #include "Helper.h"
 
 UBrandWidget::UBrandWidget(const FObjectInitializer& MovieSceneBlends) : UUserWidget(MovieSceneBlends)
+{
+	// ...
+}
+
+UBrandWidget::~UBrandWidget()
 {
 	// ...
 }
@@ -25,5 +29,5 @@ void UBrandWidget::NativeConstruct()
 	if (nullptr != GetWorld()) { HowdyGameMode = GetWorld()->GetAuthGameMode<AHowdyGameMode>(); }
 	if (nullptr == BrandText) { return; }
 
-	BrandText->SetText(FText::FromString(Helper::LetterSpacing(BrandText->GetText().ToString(), 2)));
+	BrandText->SetText(FText::FromString(FHelper::LetterSpacing(BrandText->GetText().ToString(), 2)));
 }

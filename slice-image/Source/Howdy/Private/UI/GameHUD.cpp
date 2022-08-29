@@ -16,6 +16,11 @@ AGameHUD::AGameHUD(const FObjectInitializer& ObjectInitializer) : AHUD(ObjectIni
 	// ...
 }
 
+AGameHUD::~AGameHUD()
+{
+	// ...
+}
+
 void AGameHUD::BeginPlay()
 {
 	Super::BeginPlay();
@@ -32,12 +37,12 @@ void AGameHUD::BeginPlay()
 	ShowWidget(*GridWidget);
 }
 
-void AGameHUD::ShowWidget(UUserWidget& InWidget) const
+void AGameHUD::ShowWidget(UUserWidget& InWidget)
 {
 	InWidget.AddToViewport();
 }
 
-void AGameHUD::HideWidget(UUserWidget& InWidget) const
+void AGameHUD::HideWidget(UUserWidget& InWidget)
 {
 	InWidget.RemoveFromParent();
 }

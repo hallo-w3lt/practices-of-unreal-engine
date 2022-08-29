@@ -13,10 +13,10 @@ UCustomTextBlockStyle::UCustomTextBlockStyle()
 {
 	static ConstructorHelpers::FObjectFinderOptional<USlateWidgetStyleAsset> CustomStyle(
 		TEXT("SlateWidgetStyleAsset'/Game/UI/Styles/BP_CustonTextBlockStyle.BP_CustonTextBlockStyle'"));
-	STextBlock::FArguments TextBlockDefaults;
 
 	if (CustomStyle.Succeeded())
 	{
+		STextBlock::FArguments TextBlockDefaults;
 		TextBlockDefaults.TextStyle(CustomStyle.Get());
 	}
 }

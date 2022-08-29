@@ -21,11 +21,11 @@ class HOWDY_API UHowdyGameInstance : public UGameInstance
 	GENERATED_BODY()
 
 private:
-	bool bIsNewRecord{ false };
-	bool bIsApproachingNewRecord{ false };
-	bool bSound{ true };
-	float ScaleMusicVolume{ 0.3f };
-	float ScaleFXVolume{ 0.3f };
+	bool bIsNewRecord{false};
+	bool bIsApproachingNewRecord{false};
+	bool bSound{true};
+	float ScaleMusicVolume{0.3f};
+	float ScaleFXVolume{0.3f};
 
 	// void Save();
 	// void Load();

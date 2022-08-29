@@ -9,11 +9,15 @@
 
 #include "HowdyGameMode.h"
 #include "HowdyGameState.h"
-#include "HowdyPlayerController.h"
 
 AHowdyPawn::AHowdyPawn()
 {
 	PrimaryActorTick.bCanEverTick = true;
+}
+
+AHowdyPawn::~AHowdyPawn()
+{
+	// ...
 }
 
 void AHowdyPawn::BeginPlay()
@@ -24,9 +28,9 @@ void AHowdyPawn::BeginPlay()
 	if (nullptr != HowdyGameMode) { HowdyGameState = HowdyGameMode->GetGameState<AHowdyGameState>(); }
 }
 
-void AHowdyPawn::Tick(const float DeltaTime)
+void AHowdyPawn::Tick(const float InDeltaTime)
 {
-	Super::Tick(DeltaTime);
+	Super::Tick(InDeltaTime);
 }
 
 void AHowdyPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)

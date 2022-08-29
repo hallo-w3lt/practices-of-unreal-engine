@@ -24,7 +24,8 @@ class HOWDY_API AHowdyGameState : public AGameStateBase
 
 public:
 	explicit AHowdyGameState(const FObjectInitializer& ObjectInitializer);
-	virtual ~AHowdyGameState() {};
+
+	virtual ~AHowdyGameState() override;
 
 protected:
 	virtual void BeginPlay() override;
@@ -33,7 +34,7 @@ public:
 	void OnGameStart();
 
 	UFUNCTION(BlueprintCallable, Category = Game)
-		void FinishGame();
+	void FinishGame();
 
 	void StartGameplayStateMachine();
 
@@ -41,9 +42,10 @@ public:
 
 private:
 	UPROPERTY()
-		class AHowdyPlayerController* PlayerController{ nullptr };
+	class AHowdyPlayerController* PlayerController{nullptr};
+
 	UPROPERTY()
-		const class AHowdyGameMode* HowdyGameMode{ nullptr };
+	const class AHowdyGameMode* HowdyGameMode{nullptr};
 
 	EGameplayStateType GameplayState;
 

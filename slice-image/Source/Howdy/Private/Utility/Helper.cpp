@@ -8,49 +8,51 @@
 #include "Helper.h"
 #include <Algo/Reverse.h>
 
-TArray<int32> Helper::FillIntVector(const int32 InMin, const int32 InMax, const bool bReverse = false)
+TArray<int32> FHelper::FillIntVector(const int32 InMax, const bool bReverse = false)
 {
 	TArray<int32> Buffer = {};
 	Buffer.Reserve(InMax);
 
-	for (int32 Counter{ 0 }; Counter < InMax; ++Counter)
+	for (int32 Counter{0}; Counter < InMax; ++Counter)
 	{
 		Buffer.AddUnique(Counter);
 	}
 
-	if (bReverse) {
+	if (bReverse)
+	{
 		Algo::Reverse(Buffer);
 	}
 
 	return Buffer;
 }
 
-TArray<int32> Helper::RandomIntVector(const int32 InSize, const int32 Min, const int32 Max, const bool bUnique)
+TArray<int32> FHelper::RandomIntVector(const int32 InSize, const int32 InMin, const int32 InMax, const bool bUnique)
 {
-	int64 const DateInSeconds{ FDateTime::Now().ToUnixTimestamp() };
-	FRandomStream SRand{ FRandomStream() };
+	int64 const DateInSeconds{FDateTime::Now().ToUnixTimestamp()};
+	FRandomStream SRand{FRandomStream()};
 	SRand.Initialize(DateInSeconds);
 
 	TArray<int32> Buffer = {};
 	Buffer.Reserve(InSize);
 
-	auto Counter{ 0 };
+	auto Counter{0};
 	do
 	{
 		if (bUnique)
 		{
-			Buffer.AddUnique(SRand.RandRange(Min, Max));
+			Buffer.AddUnique(SRand.RandRange(InMin, InMax));
 		}
 		else
 		{
-			Buffer.Add(SRand.RandRange(Min, Max));
+			Buffer.Add(SRand.RandRange(InMin, InMax));
 		}
-	} while (++Counter < Max);
+	}
+	while (++Counter < InMax);
 
 	return Buffer;
 }
 
-FString Helper::LetterSpacing(FString const& InSource, const int32 InSpaces)
+FString FHelper::LetterSpacing(FString const& InSource, const int32 InSpaces)
 {
 	FString Buffer{};
 	std::string const Spacing(InSpaces, ' ');
@@ -62,5 +64,3 @@ FString Helper::LetterSpacing(FString const& InSource, const int32 InSpaces)
 
 	return Buffer;
 }
-
-

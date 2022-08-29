@@ -19,7 +19,8 @@ class HOWDY_API AHowdyPawn : public APawn
 
 public:
 	explicit AHowdyPawn();
-	virtual ~AHowdyPawn() {};
+
+	virtual ~AHowdyPawn() override;
 
 protected:
 	virtual void BeginPlay() override;
@@ -27,11 +28,12 @@ protected:
 public:
 	virtual void Tick(float InDeltaTime) override;
 
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
 private:
 	UPROPERTY()
-		class AHowdyGameMode* HowdyGameMode{ nullptr };
+	class AHowdyGameMode* HowdyGameMode{nullptr};
+
 	UPROPERTY()
-		class AHowdyGameState* HowdyGameState{ nullptr };
+	class AHowdyGameState* HowdyGameState{nullptr};
 };

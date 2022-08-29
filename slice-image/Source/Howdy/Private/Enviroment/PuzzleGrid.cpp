@@ -5,15 +5,12 @@
  *  Programmer: Victor Dominguez @hallo_w3lt
  */
 
-
 #include "PuzzleGrid.h"
 
 #include "Helper.h"
 #include "PuzzleBlock.h"
-#include "Components/TextRenderComponent.h"
 #include "Behaviour/HowdyGameMode.h"
 #include "Camera/CameraActor.h"
-#include "Components/BoxComponent.h"
 #include "Engine/TargetPoint.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -42,8 +39,8 @@ void APuzzleGrid::BeginPlay()
 	BlockSpacing = HowdyGameMode->GetBlockSpacing();
 
 	FTransform Trans = {};
-	ACameraActor* CameraActor{ nullptr };
-	TArray<class AActor*> Actors = {};
+	ACameraActor* CameraActor{nullptr};
+	TArray<AActor*> Actors = {};
 
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ATargetPoint::StaticClass(), Actors);
 	for (AActor* Target : Actors)
@@ -53,7 +50,6 @@ void APuzzleGrid::BeginPlay()
 			if (Target->ActorHasTag(FName("TP_Grid")))
 			{
 				Trans = Target->GetActorTransform();
-				const auto Location = Trans.GetLocation();
 				Target->SetActorHiddenInGame(false);
 			}
 		}
@@ -71,15 +67,14 @@ void APuzzleGrid::BeginPlay()
 		}
 	}
 
-	const auto GenerateGrid = [&](FTransform& InTrans, ACameraActor& InCameraActor, const bool bColor)
+	const auto GenerateGrid = [&](const FTransform& InTrans, ACameraActor& InCameraActor, const bool bColor)
 	{
-		int32 U{ 0 }, V{ 0 };
-
-		for (int32 BlockIndex{ 0 }; BlockIndex < Helper::GetSize(Size); ++BlockIndex)
+		int32 U{0}, V{0};
+		for (int32 BlockIndex{0}; BlockIndex < FHelper::GetSize(Size); ++BlockIndex)
 		{
-			int32 const Mod{ BlockIndex % Size };
-			float const XOffset{ static_cast<float>((BlockIndex / Size) * BlockSpacing) };
-			float const YOffset{ static_cast<float>(Mod * BlockSpacing) };
+			int32 const Mod{BlockIndex % Size};
+			float const XOffset{static_cast<float>(BlockIndex / Size) * BlockSpacing};
+			float const YOffset{Mod * BlockSpacing};
 
 			if (BlockIndex > 0 && 0 == Mod)
 			{
@@ -87,14 +82,16 @@ void APuzzleGrid::BeginPlay()
 				V = 0;
 			}
 
-			FVector BlockLocation{ FVector(XOffset, YOffset, 0.f) + InTrans.GetLocation() };
+			FVector BlockLocation{FVector(XOffset, YOffset, 0.f) + InTrans.GetLocation()};
 
-			FTransform Trans{ InTrans };
-			Trans.SetLocation(BlockLocation);
-			Trans.SetRotation(FQuat(FRotator(0, 0, 0)));
+			FTransform BlockTrans{InTrans};
+			BlockTrans.SetLocation(BlockLocation);
+			BlockTrans.SetRotation(FQuat(FRotator(0, 0, 0)));
 
-			APuzzleBlock* PuzzleBlock{ GetWorld()->SpawnActorDeferred<APuzzleBlock>(HowdyGameMode->GetPuzzleBlockClass(), Trans) };
-			PuzzleBlock->SetMaterialParameter({ U, V++, Size, bColor ? 1 : 0 });
+			APuzzleBlock* PuzzleBlock{
+				GetWorld()->SpawnActorDeferred<APuzzleBlock>(HowdyGameMode->GetPuzzleBlockClass(), BlockTrans)
+			};
+			PuzzleBlock->SetMaterialParameter({U, V++, Size, bColor ? 1 : 0});
 
 			if (bColor)
 			{
@@ -105,7 +102,7 @@ void APuzzleGrid::BeginPlay()
 
 			PuzzleBlock->SetCamera(&InCameraActor);
 			PuzzleBlock->SetIndex(BlockIndex);
-			PuzzleBlock->FinishSpawning(Trans);
+			PuzzleBlock->FinishSpawning(BlockTrans);
 
 			if (bColor)
 			{

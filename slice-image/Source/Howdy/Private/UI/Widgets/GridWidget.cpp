@@ -12,6 +12,11 @@ UGridWidget::UGridWidget(const FObjectInitializer& MovieSceneBlends) : UUserWidg
 	// ...
 }
 
+UGridWidget::~UGridWidget()
+{
+	// ...
+}
+
 void UGridWidget::NativeConstruct()
 {
 	Super::NativeConstruct();

@@ -12,3 +12,8 @@ UHowdySaveGame::UHowdySaveGame(const FObjectInitializer& ObjectInitializer) : US
 	SaveSlotName = TEXT("HowdyySaveGameSlot");
 	UserIndex = 0;
 }
+
+UHowdySaveGame::~UHowdySaveGame()
+{
+	// ...
+}

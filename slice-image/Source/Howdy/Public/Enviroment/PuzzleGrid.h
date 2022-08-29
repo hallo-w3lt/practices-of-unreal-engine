@@ -28,22 +28,22 @@ public:
 
 private:
 	UPROPERTY(Category = Grid, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-		class USceneComponent* SceneComponent{ nullptr };
+	USceneComponent* SceneComponent{nullptr};
 
 	UPROPERTY(Category = Grid, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-		class ATargetPoint* TargetPoint{ nullptr };
+	class ATargetPoint* TargetPoint{nullptr};
 
 	UPROPERTY()
-		class AHowdyGameMode* HowdyGameMode{ nullptr };
+	class AHowdyGameMode* HowdyGameMode{nullptr};
 
-	int32 Size{ 0 };
-	float BlockSpacing{ 0.f };
+	int32 Size{0};
+	float BlockSpacing{0.f};
 
 	TArray<class APuzzleBlock*> Blocks = {};
-	int32 OverlappedBlocks{ 0 };
+	int32 OverlappedBlocks{0};
 
 public:
-	FORCEINLINE class USceneComponent* GetMainComponent() const { return SceneComponent; }
+	FORCEINLINE USceneComponent* GetMainComponent() const { return SceneComponent; }
 	FORCEINLINE int32 IncrementOverlappedBlocks() { return ++OverlappedBlocks; }
 
 	FORCEINLINE int32 GetSize() const { return Size; }

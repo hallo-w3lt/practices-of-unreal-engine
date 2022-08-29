@@ -16,6 +16,11 @@ AHowdyGameState::AHowdyGameState(const FObjectInitializer& ObjectInitializer) : 
 	// ...
 }
 
+AHowdyGameState::~AHowdyGameState()
+{
+	// ...
+}
+
 void AHowdyGameState::BeginPlay()
 {
 	Super::BeginPlay();

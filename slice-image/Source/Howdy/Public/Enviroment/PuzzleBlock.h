@@ -19,15 +19,17 @@ struct FMaterialParametersStruct
 {
 	GENERATED_BODY()
 
-public:
 	UPROPERTY()
-		int32 U{ 1 };
+	int32 U{1};
+
 	UPROPERTY()
-		int32 V{ 1 };
+	int32 V{1};
+
 	UPROPERTY()
-		int32 Size{ 4 };
+	int32 Size{4};
+
 	UPROPERTY()
-		int32 Saturation{ 0 };
+	int32 Saturation{0};
 };
 
 UCLASS()
@@ -37,7 +39,8 @@ class HOWDY_API APuzzleBlock : public AActor
 
 public:
 	explicit APuzzleBlock(const FObjectInitializer& ObjectInitializer);
-	virtual ~APuzzleBlock() {};
+
+	virtual ~APuzzleBlock() override;	
 
 	FOnDraggingSignature OnDragging;
 
@@ -71,72 +74,76 @@ public:
 	void HandleClicked();
 
 	UFUNCTION()
-		void OnClickedBlock(UPrimitiveComponent* ClickedComponent, FKey ButtonClicked);
+	void OnClickedBlock(UPrimitiveComponent* ClickedComponent, FKey ButtonClicked);
 	UFUNCTION()
-		void OnFingerPressedBlock(ETouchIndex::Type FingerIndex, UPrimitiveComponent* TouchedComponent);
+	void OnFingerPressedBlock(ETouchIndex::Type FingerIndex, UPrimitiveComponent* TouchedComponent);
 	UFUNCTION()
-		void SetOwningGrid(class APuzzleGrid* InPuzzleBlockGrid);
+	void SetOwningGrid(class APuzzleGrid* InPuzzleBlockGrid);
 	UFUNCTION()
-		void SetMaterialParameter(const FMaterialParametersStruct& InValue);
+	void SetMaterialParameter(const FMaterialParametersStruct& InValue);
 
 private:
 	UPROPERTY()
-		class AHowdyGameMode* HowdyGameMode{ nullptr };
+	class AHowdyGameMode* HowdyGameMode{nullptr};
 
 	UPROPERTY()
-		class AHowdyGameState* HowdyGameState{ nullptr };
+	class AHowdyGameState* HowdyGameState{nullptr};
 
 	UPROPERTY()
-		class UMaterialInstanceDynamic* PuzzleMaterialInstanceDynamic{ nullptr };
+	UMaterialInstanceDynamic* PuzzleMaterialInstanceDynamic{nullptr};
 	UPROPERTY()
-		class UMaterialInstance* PuzzleMaterialInstance = nullptr;
+	UMaterialInstance* PuzzleMaterialInstance = nullptr;
 
 	UPROPERTY(Category = Block, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-		class USceneComponent* SceneComponent{ nullptr };
+	USceneComponent* SceneComponent{nullptr};
 
 	UPROPERTY(Category = Block, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-		class UStaticMeshComponent* PlaneMesh{ nullptr };
+	UStaticMeshComponent* PlaneMesh{nullptr};
 
 	UPROPERTY(Category = Block, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-		class UStaticMeshComponent* BodyMesh{ nullptr };
+	UStaticMeshComponent* BodyMesh{nullptr};
 
 	UPROPERTY()
-		class ACameraActor* CameraActor{ nullptr };
+	ACameraActor* CameraActor{nullptr};
 
 	UPROPERTY(Category = Behaviour, EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
-		float ScopeCamera{ 200.f };
+	float ScopeCamera{200.f};
 
 	UPROPERTY()
-		class AHowdyPlayerController* PlayerController{ nullptr };
+	class AHowdyPlayerController* PlayerController{nullptr};
 
 	UPROPERTY()
-		class APuzzleBlock* PuzzleBlockOverlapped{ nullptr };
+	APuzzleBlock* PuzzleBlockOverlapped{nullptr};
 
 	UPROPERTY()
-		class APuzzleGrid* OwningGrid{ nullptr };
+	APuzzleGrid* OwningGrid{nullptr};
 
 	UPROPERTY()
-		class AGameHUD* HUD{ nullptr };
+	class AGameHUD* HUD{nullptr};
 
-	FVector OriginLocation{ FVector::ZeroVector };
+	FVector OriginLocation{FVector::ZeroVector};
 
-	bool bCanDragging{ false };
-	bool bDragging{ false };
-	bool bOverlapped{ false };
-	bool bHitting{ false };
+	bool bCanDragging{false};
+	bool bDragging{false};
+	bool bOverlapped{false};
+	bool bHitting{false};
 
 	FMaterialParametersStruct MaterialParameter;
-	struct FHitResult OutHit;
+	FHitResult OutHit;
 
-	int32 Index{ 0 };
+	int32 Index{0};
 
 public:
-	FORCEINLINE class USceneComponent* GetMainComponent() const { return SceneComponent; }
+	FORCEINLINE USceneComponent* GetMainComponent() const { return SceneComponent; }
 
-	FORCEINLINE class UStaticMeshComponent* GetPlaneMesh() const { return PlaneMesh; }
-	FORCEINLINE class UStaticMeshComponent* GetBodyMesh() const { return BodyMesh; }
+	FORCEINLINE UStaticMeshComponent* GetPlaneMesh() const { return PlaneMesh; }
+	FORCEINLINE UStaticMeshComponent* GetBodyMesh() const { return BodyMesh; }
 
-	FORCEINLINE class UMaterialInstanceDynamic* GetMaterialInstanceDynamic() const { return PuzzleMaterialInstanceDynamic; }
+	FORCEINLINE UMaterialInstanceDynamic* GetMaterialInstanceDynamic() const
+	{
+		return PuzzleMaterialInstanceDynamic;
+	}
+
 	FORCEINLINE FMaterialParametersStruct GetMaterialParameter() const { return MaterialParameter; }
 
 	FORCEINLINE int32 GetIndex() const { return Index; }
@@ -145,6 +152,6 @@ public:
 	FORCEINLINE APuzzleGrid* GetOwningGrid() const { return OwningGrid; }
 	FORCEINLINE void SetCanDragging(const bool InValue) { bCanDragging = InValue; }
 
-	FORCEINLINE void SetCamera(class ACameraActor* InValue) { CameraActor = InValue; }
+	FORCEINLINE void SetCamera(ACameraActor* InValue) { CameraActor = InValue; }
 	FORCEINLINE void SetIndex(const int32 InValue) { Index = InValue; }
 };

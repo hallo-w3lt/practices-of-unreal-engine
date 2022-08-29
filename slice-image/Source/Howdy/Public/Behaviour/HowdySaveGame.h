@@ -22,23 +22,24 @@ class HOWDY_API UHowdySaveGame : public USaveGame
 
 public:
 	explicit UHowdySaveGame(const FObjectInitializer& ObjectInitializer);
-	~UHowdySaveGame() {};
+
+	virtual ~UHowdySaveGame() override;
 
 private:
-	FString SaveSlotName {};
+	FString SaveSlotName{};
 	uint32 UserIndex{0};
 
 	UPROPERTY(Category = Basic, VisibleAnywhere)
-		bool bSound{ true };
+	bool bSound{true};
 
 	UPROPERTY(Category = Basic, VisibleAnywhere)
-		float MusicVolume{ 0.3f };
+	float MusicVolume{0.3f};
 
 	UPROPERTY(Category = Basic, VisibleAnywhere)
-		int32 MaxScore{ 0 };
+	int32 MaxScore{0};
 
 	UPROPERTY(Category = Basic, VisibleAnywhere)
-		int32 Deaths{ 0 };
+	int32 Deaths{0};
 
 public:
 	FORCEINLINE FString GetSaveSlotName() const { return SaveSlotName; }

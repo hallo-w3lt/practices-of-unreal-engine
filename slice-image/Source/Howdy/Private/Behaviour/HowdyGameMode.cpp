@@ -8,8 +8,6 @@
 
 #include "HowdyGameMode.h"
 
-#include "GameHUD.h"
-#include "GridWidget.h"
 #include "HowdyGameState.h"
 #include "HowdyPawn.h"
 #include "HowdyPlayerController.h"
@@ -23,11 +21,16 @@ AHowdyGameMode::AHowdyGameMode(const FObjectInitializer& ObjectInitializer) : AG
 	PlayerControllerClass = AHowdyPlayerController::StaticClass();
 }
 
+AHowdyGameMode::~AHowdyGameMode()
+{
+	// ...
+}
+
 void AHowdyGameMode::InitGameState()
 {
 	Super::InitGameState();
 
-	auto* const HowdyGameState{ GetGameState<AHowdyGameState>() };
+	auto* const HowdyGameState{GetGameState<AHowdyGameState>()};
 	if (nullptr == HowdyGameState) { return; }
 
 	HowdyGameState->StartGameplayStateMachine();
