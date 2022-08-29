@@ -5,10 +5,10 @@ using System.Collections.Generic;
 
 public class HowdyTarget : TargetRules
 {
-	public HowdyTarget(TargetInfo Target) : base(Target)
-	{
-		Type = TargetType.Game;
+    public HowdyTarget(TargetInfo Target) : base(Target)
+    {
+        Type = TargetType.Game;
 
-		ExtraModuleNames.AddRange( new[] { "Howdy" } );
-	}
+        ExtraModuleNames.AddRange(new[] { "Howdy" });
+    }
 }
