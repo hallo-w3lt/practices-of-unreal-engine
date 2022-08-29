@@ -9,6 +9,6 @@ public class HowdyTarget : TargetRules
 	{
 		Type = TargetType.Game;
 
-		ExtraModuleNames.AddRange( new string[] { "Howdy" } );
+		ExtraModuleNames.AddRange( new[] { "Howdy" } );
 	}
 }
