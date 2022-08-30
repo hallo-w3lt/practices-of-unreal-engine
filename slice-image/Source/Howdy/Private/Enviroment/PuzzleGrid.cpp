@@ -8,7 +8,6 @@
 #include "PuzzleGrid.h"
 
 #include "Helper.h"
-#include "PuzzleBlock.h"
 #include "Behaviour/HowdyGameMode.h"
 #include "Camera/CameraActor.h"
 #include "Engine/TargetPoint.h"
@@ -114,9 +113,9 @@ void APuzzleGrid::BeginPlay()
 	GenerateGrid(Trans, *CameraActor, true);
 }
 
-void APuzzleGrid::Tick(const float DeltaTime)
+void APuzzleGrid::Tick(const float InDeltaTime)
 {
-	Super::Tick(DeltaTime);
+	Super::Tick(InDeltaTime);
 }
 
 #undef LOCTEXT_NAMESPACE

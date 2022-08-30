@@ -15,8 +15,8 @@
 class HOWDY_API FHelper
 {
 public:
-	explicit FHelper() = default;
-	~FHelper() = default;
+	explicit FHelper() = delete;
+	~FHelper(){}
 
 	static TArray<int32> FillIntVector(const int32 InMax, const bool bReverse);
 	static TArray<int32> RandomIntVector(int32 const InSize, int32 const InMin, int32 const InMax, bool bUnique = true);

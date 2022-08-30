@@ -40,7 +40,7 @@ class HOWDY_API APuzzleBlock : public AActor
 public:
 	explicit APuzzleBlock(const FObjectInitializer& ObjectInitializer);
 
-	virtual ~APuzzleBlock() override;	
+	virtual ~APuzzleBlock() override;
 
 	FOnDraggingSignature OnDragging;
 
