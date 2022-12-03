@@ -80,7 +80,8 @@ Plugins/*/Intermediate/*
 DerivedDataCache/*
 
 # Initial content
-/Content/Characters/
-/Content/StarterContent/
-/Content/__ExternalActors__/
-/Content/__ExternalObjects__/
+Content/Characters/*
+Content/StarterContent/*
+Content/__ExternalActors__/
+Content/__ExternalActors__/
+Content/__ExternalObjects__/
